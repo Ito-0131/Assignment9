@@ -42,23 +42,12 @@ public class TrainerController {
         }
 
         List<Trainer> trainers = trainerService.findAll();
-        if (trainers.isEmpty()) {
-            throw new TrainerNotFoundException("No trainers available");
-        }
         return trainers;
+
     }
-    //　指定した誕生日のトレーナーを取得する
     // 例：http://localhost:8080/trainers?birthday=1990-01-01
-
-    // 特定のtrainer_idのトレーナーを取得する
     // 例：http://localhost:8080/trainers?trainerId=1
-
-    // 全件取得する
     // http://localhost:8080/trainers
-
-    // クエリ文字列を指定して検索する
     // 例：http://localhost:8080/trainers?name=キハダ
-
-    // 特定の文字から始まる名前を取得する
     // 例：http://localhost:8080/trainers?startingWith=あ
 }
