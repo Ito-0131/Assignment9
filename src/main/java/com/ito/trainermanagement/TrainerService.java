@@ -14,23 +14,42 @@ public class TrainerService {
     }
 
     public List<Trainer> findByNameStartingWith(String startingWith) {
-        return trainerMapper.findByNameStartingWith(startingWith);
+        List<Trainer> trainers = trainerMapper.findByNameStartingWith(startingWith);
+        if (trainers.isEmpty()) {
+            throw new TrainerNotFoundException(startingWith + "で始まる名前のトレーナーは存在していません");
+        }
+        return trainers;
     }
 
     public List<Trainer> findByBirthday(String birthday) {
-        return trainerMapper.findByBirthday(birthday);
+        List<Trainer> trainers = trainerMapper.findByBirthday(birthday);
+        if (trainers.isEmpty()) {
+            throw new TrainerNotFoundException("生年月日が" + birthday + "のトレーナーはいません");
+        }
+        return trainers;
     }
 
     public Optional<Trainer> findByTrainerId(int trainerId) {
-        return trainerMapper.findByTrainerId(trainerId);
+        Optional<Trainer> trainer = trainerMapper.findByTrainerId(trainerId);
+        if (!trainer.isPresent()) {
+            throw new TrainerNotFoundException("trainerIdが" + trainerId + "のトレーナーはいません");
+        }
+        return trainer;
     }
 
     public List<Trainer> findAll() {
-        return trainerMapper.findAll();
+        List<Trainer> trainers = trainerMapper.findAll();
+        if (trainers.isEmpty()) {
+            throw new TrainerNotFoundException("トレーナーはいません");
+        }
+        return trainers;
     }
 
     public List<Trainer> findByName(String name) {
-        return trainerMapper.findByName(name);
+        List<Trainer> trainers = trainerMapper.findByName(name);
+        if (trainers.isEmpty()) {
+            throw new TrainerNotFoundException(name + "という名前のトレーナーはいません");
+        }
+        return trainers;
     }
-
 }

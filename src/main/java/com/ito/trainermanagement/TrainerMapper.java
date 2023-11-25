@@ -25,4 +25,3 @@ public interface TrainerMapper {
     @Select("SELECT * FROM names WHERE trainer_id = #{trainerId}")
     Optional<Trainer> findByTrainerId(int trainerId);
 }
-

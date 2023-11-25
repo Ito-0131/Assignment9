@@ -23,41 +23,25 @@ public class TrainerController {
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Integer trainerId) {
 
-        List<Trainer> trainers;
 
         if (startingWith != null) {
-            trainers = trainerService.findByNameStartingWith(startingWith);
-            if (trainers.isEmpty()) {
-                throw new TrainerNotFoundException(startingWith + "で始まる名前のトレーナーは存在していません");
-            }
-            return trainers;
+            return trainerService.findByNameStartingWith(startingWith);
         }
 
         if (birthday != null) {
-            trainers = trainerService.findByBirthday(birthday);
-            if (trainers.isEmpty()) {
-                throw new TrainerNotFoundException("生年月日が" + birthday + "のトレーナーはいません");
-            }
-            return trainers;
+            return trainerService.findByBirthday(birthday);
         }
 
         if (name != null) {
-            trainers = trainerService.findByName(name);
-            if (trainers.isEmpty()) {
-                throw new TrainerNotFoundException(name + "という名前のトレーナーはいません");
-            }
-            return trainers;
+            return trainerService.findByName(name);
         }
 
         if (trainerId != null) {
             Optional<Trainer> trainer = trainerService.findByTrainerId(trainerId);
-            if (!trainer.isPresent()) {
-                throw new TrainerNotFoundException("trainerIdが" + trainerId + "のトレーナーはいません");
-            }
             return Arrays.asList(trainer.get());
         }
 
-        trainers = trainerService.findAll();
+        List<Trainer> trainers = trainerService.findAll();
         if (trainers.isEmpty()) {
             throw new TrainerNotFoundException("No trainers available");
         }
