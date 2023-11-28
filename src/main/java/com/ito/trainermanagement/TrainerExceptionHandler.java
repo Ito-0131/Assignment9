@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class TrainerExceptionHandler {
     @ExceptionHandler(TrainerNotFoundException.class)
-    public ResponseEntity<?> handleTrainerNotFoundException(TrainerNotFoundException e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> handleTrainerNotFoundException(TrainerNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
-
 }
